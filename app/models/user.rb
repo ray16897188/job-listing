@@ -25,14 +25,19 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  #我的好友列表里都有谁       
-  has_many :friendships                          
+  # 我的好友列表里都有谁       
+  has_many :friendships           
+  # 如何获得user.friends? 返回friendships中的（有个隐含设定：要从user_id是当前user.id的items里面找）friend_id这一列“外键”所指向的内容
   has_many :friends, :through => :friendships, :source => :friend
 
-  #我在谁的好友列表里
+  # 我在谁的好友列表里
+  # 如何获得user.inverse_friendships？(class_name和foreign_key是self join查询所对应的解法)
+  # 从Friendship表的foreign_key = friend_id = user.id的items中
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  # 如何获得user.inverse_friends？通过上面的inverse_friendships，从user_id这个column对应的外键去找对应的user
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
+  # through可以是通过items，也可以是表
 
 
 
