@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   #我的好友列表里都有谁       
   has_many :friendships                          
-  has_many :friends, :through => :friendships    
+  has_many :friends, :through => :friendships#, :source => :user
 
   #我在谁的好友列表里
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
