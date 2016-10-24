@@ -17,7 +17,11 @@
            			<td><%= user.email %></td>
 
            			<td>
-           				<%= link_to("加为好友", add_friend_user_path(user), method: :post, class: "btn btn-sm btn-default") %>
+                  <% if current_user.friends.include?(user) %>
+                    <%= link_to("删除好友", friendships_destroy_path(:friend_id => user), method: :post, class: "btn btn-sm btn-default") %>
+                  <% else %>
+           				   <%= link_to("加为好友", friendships_create_path(:friend_id => user), method: :post, class: "btn btn-sm btn-default") %>
+                  <% end %>
            			</td>
 
 					

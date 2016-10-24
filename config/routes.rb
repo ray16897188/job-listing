@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  get 'users/index'
+  post 'friendships/create'
 
-  get 'users/show'
+  post 'friendships/destroy'
+
+  # get 'users/index'
+
+  # get 'users/show'
+
 
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -27,11 +32,13 @@ Rails.application.routes.draw do
     
   end
 
-  resources :users do
-    member do
-      post :add_friend
-    end
-  end
+  resources :users
+
+  # resources :users do
+  #   member do
+  #     post :add_friend
+  #   end
+  # end
 
   root "jobs#index"
 end
